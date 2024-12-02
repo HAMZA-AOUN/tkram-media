@@ -36,7 +36,7 @@ const UpdatePost: React.FC<{ post: Post }> = ({ post }) => {
   return (
     <div>
       <h1 className="flex my-4  text-3xl font-bold text-gray-900">
-        Create a Post
+        Update a Post
       </h1>
       <div className="h-[1px] w-full bg-gray-300 mb-4" />
       <form
