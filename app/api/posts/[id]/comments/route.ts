@@ -1,10 +1,8 @@
 import { NextResponse } from "next/server";
+type tParams = Promise<{ id: string }>;
 
-export async function GET(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
-  const { id } = params;
+export async function GET(request: Request, { params }: { params: tParams }) {
+  const { id } = await params;
   const res = await fetch(
     `https://jsonplaceholder.typicode.com/posts/${id}/comments`
   );
