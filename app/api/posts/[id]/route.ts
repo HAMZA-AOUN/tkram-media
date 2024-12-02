@@ -1,10 +1,8 @@
 import { NextResponse } from "next/server";
+type tParams = Promise<{ id: string }>;
 
-export async function GET(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
-  const { id } = params;
+export async function GET(request: Request, { params }: { params: tParams }) {
+  const { id } = await params;
   const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
   const data = await res.json();
   return NextResponse.json(data);
@@ -12,9 +10,9 @@ export async function GET(
 
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: tParams }
 ) {
-  const { id } = params;
+  const { id } = await params;
   const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
     method: "DELETE",
   });
@@ -29,11 +27,8 @@ export async function DELETE(
   return NextResponse.json({ message: "Post deleted successfully" });
 }
 
-export async function PUT(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
-  const { id } = params;
+export async function PUT(request: Request, { params }: { params: tParams }) {
+  const { id } = await params;
   const body = await request.json();
   const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
     method: "PUT",
